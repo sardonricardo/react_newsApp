@@ -1,0 +1,12 @@
+nav ul {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+li {
+    text-decoration: none;
+}

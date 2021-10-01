@@ -1,0 +1,16 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto; 
+
+        &-content {
+            height: 50vh;
+        }
+
+}
