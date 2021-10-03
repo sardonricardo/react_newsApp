@@ -1,24 +1,30 @@
 import React, { Component } from "react";
+import { Input } from '@nextui-org/react';
+import Button from '@mui/material/Button';
+import List from '../List'
+import { Redirect } from "react-router-dom";
 
 class Form extends Component {
+
+  
 
   constructor(props) {
         
     super(props)
 
-
-
-    this.title = React.createRef(); // Referencia para URL
+   /* this.title = React.createRef(); // Referencia para URL
     this.author = React.createRef();
-    this.content = React.createRef();
-    this.url = React.createRef(); 
+    this.content = React.createRef(); */
+    this.url = React.createRef();  
+    this.urlToImage = React.createRef(); 
 
     this.state = {
-      data: {}
+      news: [],
+      redirect: false
     }
 }
 
-  addProduct = (event) => {
+  addNews = (event) => {
     //const name = prompt("Introduce nombre")
     //const desc = prompt("introduce descripción")
 
@@ -29,44 +35,48 @@ class Form extends Component {
     const title = event.target.elements.title.value;
     const author = event.target.elements.author.value;
     const content = event.target.elements.content.value;
-    const url = event.target.elements.content.value; 
+    const url = this.url.current.value; 
+    const urlToImage = this.urlToImage.current.value; 
 
     /* console.log(title, author, content, url)  */
 
-      if (title && author && content && url) {
+      if (title && author && content && url && urlToImage) {
 
-        this.setState({
+        const newToAdd = { title, author, content, url, urlToImage } 
 
-          data: {
-          title: title,
-          author: author,
-          content: content,
-          url: url
-            }
-         })
+        this.props.newPassed(newToAdd); 
+        console.log('entro!')
 
-        console.log()
-
-        //Añadir producto al array
-       /*  const newArticle = news
-        this.setState({ news: [...this.state.news, newArticle] }) */
+        /* this.setState({ redirect: "/list" }); */
+        
+      }
+    
     }
-  }
+    
+  
+
+  /* formPage =()=>{
+      const openFormPage= () => {
+        history.push('/list'); //this will open login page on click of login button
+    }
+  } */
 
 
   render() {
+
     return <div className="form--container">
 
     {/* Añadir nueva noticia */}
 
     <h2>Add new article</h2>
     
-    <form action="" onSubmit={this.addProduct} className="form-form">
-      <input type="text" name="title" id="" placeholder="Title" ref="" className="form-form-title"/>
-      <input type="text" name="author" id="" placeholder="Author" ref="" className="form-form-author"/>
-      <textarea name="content" rows="10" cols="50" placeholder="Start writting..." className="form-form-content" ref=""></textarea>
-      <input type="url" name="url" id="" placeholder="Url" className="form-form-url" ref="" />
-      <input type="submit" value="Register" />
+    <form action="" onSubmit={this.addNews} className="form-form">
+      <Input underlined animated={false} type="text" name="title" id="" placeholder="Title" className="form-form-title"/>
+      <Input underlined animated={false} type="text" name="author" id="" placeholder="Author" className="form-form-author"/>
+      <textarea type="text"name="content" rows="10" cols="50" placeholder="Start writting..." className="form-form-content" ></textarea>
+      <Input underlined animated={false} type="url" name="url" id="" placeholder="Url" className="form-form-url" ref={this.url} />
+      <Input underlined animated={false} type="url" name="urlToImage" id="" ref={this.urlToImage} placeholder="Image url"/>
+      <Button variant="contained" color="success" type="submit" value="Register" >Add</Button>
     </form>
 
     </div>;
