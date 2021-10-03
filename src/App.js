@@ -6,8 +6,8 @@ import Header from './components/Header';
 import Form from './components/Form'; 
 import Main from './components/Main';
 import './styles/styles.scss'
-
 import {userContext} from './context/userContext';
+import { CssBaseline } from '@nextui-org/react';
 
 
 export class App extends Component {
@@ -30,8 +30,8 @@ export class App extends Component {
       }
     })
   }
-  
-/*   logout = () => this.setState({user:{name:""}}) */
+
+  logout = () => this.setState({user:{name:""}})
 
 
   //Función que cambia el color! 
@@ -40,13 +40,15 @@ export class App extends Component {
   render() {
     const value = {
       user: this.state.user,
-      login: this.login
-      /* logout: this.logout  */
+      login: this.login,
+      logout: this.logout
     }
 
    
     return (
       <div className="App">
+      
+      <CssBaseline /> 
       <BrowserRouter>
 
         <userContext.Provider value={value}>   
@@ -60,5 +62,6 @@ export class App extends Component {
     )
   }
 }
+
 
 export default App
